@@ -29,7 +29,6 @@ public class UserClient extends BaseRestClient {
     public ValidatableResponse deleteUser(String accessToken) {
         return given().log().all()
                 .spec(getReqSpecAuth(accessToken))
-                .auth().oauth2(accessToken)
                 .delete(BaseRestClient.USER_PATH)
                 .then()
                 .log().body();
