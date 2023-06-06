@@ -1,3 +1,6 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,10 +9,6 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.ValidatableResponse;
-
 
 public class UserCreationPositiveTest {
     private User user;
@@ -17,7 +16,7 @@ public class UserCreationPositiveTest {
     private String accessToken = null;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         user = UserGenerator.getRandomFullData();
         userClient = new UserClient();
     }
@@ -57,7 +56,7 @@ public class UserCreationPositiveTest {
 
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }

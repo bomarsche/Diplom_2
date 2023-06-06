@@ -23,7 +23,7 @@ public class UserOrdersTest {
     private List<String> responseIngredients;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandomFullData();
         order = new Order();
@@ -38,7 +38,7 @@ public class UserOrdersTest {
     @Test
     @DisplayName("Получить заказы авторизованного пользователя")
     @Description("GET /api/orders → 200 OK || {success: true}")
-    public void getOrdersWithAuthTest(){
+    public void getOrdersWithAuthTest() {
         ValidatableResponse createResponse = orderClient.getOrdersWithAuth(accessToken);
         createResponse.assertThat()
                 .statusCode(SC_OK)
@@ -49,7 +49,7 @@ public class UserOrdersTest {
     @Test
     @DisplayName("Получить заказы неавторизованного пользователя")
     @Description("GET /api/orders → 401 Unauthorized || {success: false}")
-    public void getOrdersWithoutAuthTest(){
+    public void getOrdersWithoutAuthTest() {
         ValidatableResponse createResponse = orderClient.getOrdersWithoutAuth();
         createResponse.assertThat()
                 .statusCode(SC_UNAUTHORIZED)
@@ -58,7 +58,7 @@ public class UserOrdersTest {
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }

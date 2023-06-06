@@ -16,7 +16,8 @@ public class BaseRestClient {
         return new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType(ContentType.JSON)
-                .build();
+                .build()
+                .log().all();
     }
 
     protected RequestSpecification getReqSpecAuth(String accessToken) {
@@ -24,6 +25,7 @@ public class BaseRestClient {
                 .setBaseUri(BASE_URI)
                 .setContentType(ContentType.JSON)
                 .addHeader("authorization", accessToken)
-                .build();
+                .build()
+                .log().all();
     }
 }

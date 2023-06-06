@@ -22,7 +22,7 @@ public class OrderCreationPositiveTest {
     private List<String> responseIngredients;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandomFullData();
         order = new Order();
@@ -36,7 +36,7 @@ public class OrderCreationPositiveTest {
     @Test
     @DisplayName("Создание заказа после успешной авторизации пользователя")
     @Description("POST /api/orders → 200 OK || {success: true}")
-    public void createOrderWithAuthTest(){
+    public void createOrderWithAuthTest() {
         ValidatableResponse createResponse = orderClient.createOrderWithAuth(order, accessToken);
         createResponse.assertThat()
                 .statusCode(SC_OK)
@@ -47,7 +47,7 @@ public class OrderCreationPositiveTest {
     @Test
     @DisplayName("Создание заказа без авторизации пользователя")
     @Description("POST /api/orders → 200 OK || {success: true}")
-    public void createOrderWithoutAuthTest(){
+    public void createOrderWithoutAuthTest() {
         ValidatableResponse createResponse = orderClient.createOrderWithAuth(order, "");
         createResponse.assertThat()
                 .statusCode(SC_OK)
@@ -58,7 +58,7 @@ public class OrderCreationPositiveTest {
     @Test
     @DisplayName("Создание заказа c ингредиентами")
     @Description("POST /api/orders → 200 OK || {success: true}")
-    public void createOrderWithIngredientsTest(){
+    public void createOrderWithIngredientsTest() {
         ValidatableResponse createResponse = orderClient.createOrderWithAuth(order, accessToken);
         createResponse.assertThat()
                 .statusCode(SC_OK)
@@ -67,7 +67,7 @@ public class OrderCreationPositiveTest {
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }

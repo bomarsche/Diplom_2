@@ -15,7 +15,7 @@ public class UserLoginTest {
     private String accessToken = null;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         user = UserGenerator.getRandomFullData();
         userClient = new UserClient();
         accessToken = userClient.createUser(user).extract().path("accessToken");
@@ -55,9 +55,8 @@ public class UserLoginTest {
     }
 
 
-
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }

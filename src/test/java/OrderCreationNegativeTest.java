@@ -9,7 +9,8 @@ import org.junit.runners.Parameterized;
 
 import java.util.List;
 
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 import static org.hamcrest.Matchers.equalTo;
 
 
@@ -36,7 +37,7 @@ public class OrderCreationNegativeTest {
     }
 
     @Before
-    public void setUp(){
+    public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandomFullData();
         orderClient = new OrderClient();
@@ -47,7 +48,7 @@ public class OrderCreationNegativeTest {
     @Test
     @DisplayName("Создание заказа после успешной авторизации пользователя")
     @Description("POST /api/orders → 500 Internal Server Error || {success: false}")
-    public void createOrderWithAuthTest(){
+    public void createOrderWithAuthTest() {
         order = new Order(ingredients);
         ValidatableResponse createResponse = orderClient.createOrderWithAuth(order, accessToken);
         createResponse.assertThat()
@@ -57,7 +58,7 @@ public class OrderCreationNegativeTest {
     @Test
     @DisplayName("Создание заказа без авторизации пользователя")
     @Description("POST /api/orders → 500 Internal Server Error || {success: false}")
-    public void createOrderWithoutAuthTest(){
+    public void createOrderWithoutAuthTest() {
         order = new Order(ingredients);
         ValidatableResponse createResponse = orderClient.createOrderWithoutAuth(order);
         createResponse.assertThat()
@@ -67,7 +68,7 @@ public class OrderCreationNegativeTest {
     @Test
     @DisplayName("Создание заказа без ингредиентов после успешной авторизации пользователя")
     @Description("POST /api/orders → 400 Bad Request || {success: false}")
-    public void createOrderWithoutIngredientsTest(){
+    public void createOrderWithoutIngredientsTest() {
         order = new Order();
         ValidatableResponse createResponse = orderClient.createOrderWithAuth(order, accessToken);
         createResponse.assertThat()
@@ -79,7 +80,7 @@ public class OrderCreationNegativeTest {
 
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }

@@ -30,7 +30,7 @@ public class UserCreationNegativeTest {
     }
 
     @Before
-    public void setUp(){
+    public void setUp() {
         userClient = new UserClient();
     }
 

@@ -1,7 +1,6 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,7 @@ public class UserEditTest {
     private String accessToken = null;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         user = UserGenerator.getRandomFullData();
         userClient = new UserClient();
         accessToken = userClient.createUser(user).extract().path("accessToken");
@@ -72,7 +71,7 @@ public class UserEditTest {
 
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         if (accessToken != null && !accessToken.isBlank()) {
             userClient.deleteUser(accessToken);
         }
